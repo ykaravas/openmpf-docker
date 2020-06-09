@@ -48,7 +48,7 @@ ENV JAVA_HOME=/etc/alternatives/java_sdk
 
 RUN mkdir /tmp/python; \
     cd /tmp/python; \
-    curl 'https://www.python.org/ftp/python/3.8.2/Python-3.8.2.tar.xz' \
+    curl --insecure 'https://www.python.org/ftp/python/3.8.2/Python-3.8.2.tar.xz' \
         | tar --extract --xz; \
     cd Python-3.8.2; \
     ./configure --enable-optimizations --with-lto --enable-shared; \
@@ -65,11 +65,11 @@ RUN mkdir /tmp/python; \
 
 RUN mkdir /tmp/opencv-contrib; \
     cd /tmp/opencv-contrib; \
-    curl --location 'https://github.com/opencv/opencv_contrib/archive/3.4.7.tar.gz' \
+    curl --insecure --location 'https://github.com/opencv/opencv_contrib/archive/3.4.7.tar.gz' \
         | tar --extract --gzip; \
     mkdir /tmp/opencv; \
     cd  /tmp/opencv; \
-    curl --location 'https://github.com/opencv/opencv/archive/3.4.7.tar.gz' \
+    curl --insecure --location 'https://github.com/opencv/opencv/archive/3.4.7.tar.gz' \
         | tar --extract --gzip; \
     cd opencv-3.4.7; \
     mkdir build; \
@@ -82,7 +82,8 @@ RUN mkdir /tmp/opencv-contrib; \
     ln --symbolic /opt/opencv-3.4.7/include/opencv /usr/local/include/opencv; \
     rm --recursive /tmp/opencv /tmp/opencv-contrib;
 
-RUN curl --location 'https://archive.apache.org/dist/maven/maven-3/3.3.3/binaries/apache-maven-3.3.3-bin.tar.gz' \
+RUN curl --insecure \
+        --location 'https://archive.apache.org/dist/maven/maven-3/3.3.3/binaries/apache-maven-3.3.3-bin.tar.gz' \
         | tar --extract --gzip --directory /opt; \
     ln --symbolic /opt/apache-maven-3.3.3/bin/mvn /usr/local/bin;
 

@@ -45,7 +45,8 @@ RUN yum update --assumeyes; \
 ENV JAVA_HOME=/etc/alternatives/java_sdk
 
 
-RUN curl --location 'https://archive.apache.org/dist/maven/maven-3/3.3.3/binaries/apache-maven-3.3.3-bin.tar.gz' \
+RUN curl --insecure \
+        --location 'https://archive.apache.org/dist/maven/maven-3/3.3.3/binaries/apache-maven-3.3.3-bin.tar.gz' \
         | tar --extract --gzip --directory /opt; \
     ln --symbolic /opt/apache-maven-3.3.3/bin/mvn /usr/local/bin;
 

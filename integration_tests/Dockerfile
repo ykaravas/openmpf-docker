@@ -43,7 +43,8 @@ RUN yum install -y java-11-openjdk; \
 
 ENV JAVA_HOME /etc/alternatives/jre
 
-RUN curl --location 'http://archive.apache.org/dist/tomcat/tomcat-8/v8.5.41/bin/apache-tomcat-8.5.41.tar.gz' \
+RUN curl --insecure \
+        --location 'http://archive.apache.org/dist/tomcat/tomcat-8/v8.5.41/bin/apache-tomcat-8.5.41.tar.gz' \
         | tar --extract --gzip --directory /opt; \
     ln --symbolic /opt/apache-tomcat-8.5.41 /opt/apache-tomcat; \
     rm --recursive /opt/apache-tomcat/webapps/examples; \
@@ -55,11 +56,13 @@ RUN curl --location 'http://archive.apache.org/dist/tomcat/tomcat-8/v8.5.41/bin/
             /opt/apache-tomcat/conf/context.xml;
 
 RUN mkdir /scripts; \
-    curl --location https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh \
+    curl --insecure \
+        --location https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh \
         > /scripts/wait-for-it.sh; \
     chmod +x /scripts/wait-for-it.sh;
 
-RUN curl --location 'https://archive.apache.org/dist/maven/maven-3/3.3.3/binaries/apache-maven-3.3.3-bin.tar.gz' \
+RUN curl --insecure \
+        --location 'https://archive.apache.org/dist/maven/maven-3/3.3.3/binaries/apache-maven-3.3.3-bin.tar.gz' \
         | tar --extract --gzip --directory /opt; \
     ln --symbolic /opt/apache-maven-3.3.3/bin/mvn /usr/local/bin;
 

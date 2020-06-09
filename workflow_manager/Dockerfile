@@ -59,12 +59,14 @@ RUN yum update --assumeyes; \
 
 
 RUN mkdir /scripts; \
-    curl --location https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh \
+    curl --insecure \
+        --location https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh \
         > /scripts/wait-for-it.sh; \
     chmod +x /scripts/wait-for-it.sh;
 
 
-RUN curl --location 'http://archive.apache.org/dist/tomcat/tomcat-8/v8.5.41/bin/apache-tomcat-8.5.41.tar.gz' \
+RUN curl --insecure \
+        --location 'http://archive.apache.org/dist/tomcat/tomcat-8/v8.5.41/bin/apache-tomcat-8.5.41.tar.gz' \
         | tar --extract --gzip --directory /opt; \
     ln --symbolic /opt/apache-tomcat-8.5.41 /opt/apache-tomcat; \
     rm --recursive /opt/apache-tomcat/webapps/*; \
