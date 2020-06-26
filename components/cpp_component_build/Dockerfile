@@ -40,7 +40,7 @@ ENV LANG en_US.UTF-8
 RUN yum-config-manager --setopt=override_install_langs='' --save; \
     yum update --assumeyes; \
     yum install --assumeyes epel-release \
-            https://download1.rpmfusion.org/free/el/rpmfusion-free-release-7.noarch.rpm; \
+            http://download1.rpmfusion.org/free/el/rpmfusion-free-release-7.noarch.rpm; \
     yum install --assumeyes cmake3 make gcc gcc-c++ qt-devel log4cxx-devel boost-devel ffmpeg gtest-devel; \
     yum clean all; \
     rm --recursive /var/cache/yum/*;
